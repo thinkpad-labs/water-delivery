@@ -20,12 +20,38 @@ export default function NavBar() {
             </p>
           </div>
           <nav className="flex flex-col gap-2">
-            <NavItem icon={LayoutDashboard} label="Overview" />
-            <NavItem icon={Truck} label="Distributors" active />
-            <NavItem icon={BarChart3} label="Analytics" />
-            <NavItem icon={FolderOpen} label="Projects" />
-            <NavItem icon={MessageSquare} label="Messages" badge={3} />
-            <NavItem icon={FileText} label="Reports" />
+            <NavItem icon={LayoutDashboard} label="Overview" to="#" />
+            <NavItem
+              icon={Truck}
+              label="Distributors"
+              to="/distributors"
+              active={location.pathname === "/distributors"}
+            />
+            <NavItem
+              icon={BarChart3}
+              label="Analytics"
+              to="#"
+              active={location.pathname === "/"}
+            />
+            <NavItem
+              icon={FolderOpen}
+              label="Projects"
+              to="#"
+              active={location.pathname === "/"}
+            />
+            <NavItem
+              icon={MessageSquare}
+              label="Messages"
+              to="#"
+              badge={3}
+              active={location.pathname === "/"}
+            />
+            <NavItem
+              icon={FileText}
+              label="Reports"
+              to="#"
+              active={location.pathname === "/"}
+            />
           </nav>
         </div>
 

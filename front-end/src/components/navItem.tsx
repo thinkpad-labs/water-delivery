@@ -1,6 +1,15 @@
-export const NavItem = ({ icon: Icon, label, badge, active = false }: any) => (
-  <a
-    href="#"
+import { Link } from "react-router-dom";
+import type { NavItemProps } from "../types/navItem";
+
+export const NavItem: React.FC<NavItemProps> = ({
+  icon: Icon,
+  label,
+  badge,
+  active = false,
+  to,
+}) => (
+  <Link
+    to={to}
     className={`flex items-center gap-4 px-3 md:px-4 py-3 rounded-full transition-all group relative overflow-hidden ${
       active
         ? "bg-blue-50 text-blue-600 shadow-sm ring-1 ring-blue-100"
@@ -23,5 +32,5 @@ export const NavItem = ({ icon: Icon, label, badge, active = false }: any) => (
         {badge}
       </span>
     )}
-  </a>
+  </Link>
 );

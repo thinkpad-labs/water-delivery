@@ -6,10 +6,34 @@ To install dependencies:
 bun install
 ```
 
-To run:
+To run in dev:
 
 ```bash
-bun run index.ts
+bun dev
 ```
 
-This project was created using `bun init` in bun v1.2.2. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+Directory tree structure:
+
+```text
+back-end/
+├── .gitignore               # Git ignore rules
+├── drizzle/                 # Drizzle ORM migration files
+│   ├── meta/
+│   └── *.sql
+│
+├── src/                     # Application source code
+│   ├── routes/              # Route definitions (API endpoints)
+│   ├── controllers/         # Request handlers / business logic
+│   ├── middleware/          # Custom Express middlewares
+│   ├── utils/               # Helper and utility functions
+│   ├── zod/                 # Zod schemas for validation
+│   ├── db/                  # Database client and schema definitions
+│   │   ├── schema.ts
+│   │   └── dbClient.ts
+│   └── index.ts             # Web server entry point
+│
+├── package.json
+├── tsconfig.json
+├── drizzle.config.ts        # Drizzle configuration (root)
+└── .env
+```

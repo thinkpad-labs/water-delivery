@@ -1,7 +1,5 @@
 import { useState } from "react";
 import {
-  Settings,
-  Zap,
   Plus,
   Truck,
   Store,
@@ -10,14 +8,7 @@ import {
   MoreVertical,
   ChevronLeft,
   ChevronRight,
-  LayoutDashboard,
-  BarChart3,
-  FolderOpen,
-  MessageSquare,
-  FileText,
-  LogOut,
 } from "lucide-react";
-import { NavItem } from "../components/navItem";
 import { StatCard } from "../components/statCard";
 import { StatusBadge } from "../components/statusBadge";
 import type { Distributor } from "../types/distributors";

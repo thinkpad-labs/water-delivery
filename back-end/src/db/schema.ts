@@ -20,7 +20,9 @@ export const usersTable = pgTable("users", {
 export const distributorsTable = pgTable("distributors", {
     id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
     userId: integer("user_id").references(() => usersTable.id),
-    status: distributorStatus("status")
+    storeName: text("store_name"),
+    status: distributorStatus("status"),
+    dues: text()
 })
 
 

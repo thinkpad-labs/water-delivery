@@ -1,0 +1,23 @@
+import type { Request, Response } from "express";
+import bcrypt from 'bcrypt'
+import { addScheme } from "../../zod/Distributors.zod";
+import { db } from "../../db/dbClient";
+import { distributorsTable, usersTable } from "../../db/schema";
+
+export const addDistributor = async (req: Request, res: Response): Promise<Response> => {
+    try {
+        const validBody = addScheme.safeParse(req.body)
+        if (!validBody.success) {
+            console.error("Issue in 'addDistributor' req.body", validBody.error.flatten())
+            return res.status(400).json({ code: "BAD_REQUEST" })
+        }
+        const { name, email, phone, location, password } = validBody.data
+        const hashedPass = await bcrypt.hash(password, 10)
+        const [{ id }] = await db.insert(usersTable).values({ name, email, phone, password: hashedPass, location }).returning({ id: usersTable.id })
+        await db.insert(distributorsTable).values({ userId: id, status: "not_in_operation" })
+        return res.status(201).json({ code: "DISTRIBUTOR_CREATED" })
+    } catch (error) {
+        console.error("Couldn't add distributor due to a server error:", error)
+        return res.status(500).json({ message: "Server error" })
+    }
+}

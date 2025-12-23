@@ -12,10 +12,10 @@ export const addDistributor = async (req: Request, res: Response): Promise<Respo
             console.error("Issue in 'addDistributor' req.body", validBody.error.flatten())
             return res.status(400).json({ code: "BAD_REQUEST" })
         }
-        const { name, email, phone, location, password } = validBody.data
+        const { name, email, phone, location, password, storeName } = validBody.data
         const hashedPass = await bcrypt.hash(password, 10)
         const [{ id }] = await db.insert(usersTable).values({ name, email, phone, password: hashedPass, location }).returning({ id: usersTable.id })
-        await db.insert(distributorsTable).values({ userId: id, status: "not_in_operation" })
+        await db.insert(distributorsTable).values({ userId: id, status: "not_in_operation", storeName, dues: "0.00" })
         return res.status(201).json({ code: "DISTRIBUTOR_CREATED" })
     } catch (error) {
         console.error("Couldn't add distributor due to a server error:", error)

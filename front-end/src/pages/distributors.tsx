@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import {
   Plus,
   Truck,
@@ -12,61 +13,16 @@ import {
 import { StatCard } from "../components/statCard";
 import { StatusBadge } from "../components/statusBadge";
 import type { Distributor } from "../types/distributors";
-
-const distributors: Distributor[] = [
-  {
-    id: "#DIST-001",
-    name: "Apex Distributors Inc.",
-    initials: "AD",
-    storeName: "MegaMart Central",
-    region: "North America",
-    status: "Active",
-    dues: 12450.0,
-    colorFrom: "from-blue-100",
-    colorTo: "to-blue-200",
-    textColor: "text-blue-600",
-  },
-  {
-    id: "#DIST-004",
-    name: "Global Supplies Ltd.",
-    initials: "GS",
-    storeName: "Tech Haven",
-    region: "Europe",
-    status: "Active",
-    dues: 8200.5,
-    colorFrom: "from-purple-100",
-    colorTo: "to-purple-200",
-    textColor: "text-purple-600",
-  },
-  {
-    id: "#DIST-012",
-    name: "Fast Delivery Co.",
-    initials: "FD",
-    storeName: "QuickShop 24/7",
-    region: "Asia Pacific",
-    status: "Overdue",
-    dues: 3850.0,
-    colorFrom: "from-orange-100",
-    colorTo: "to-orange-200",
-    textColor: "text-orange-600",
-  },
-  {
-    id: "#DIST-023",
-    name: "North Logistics",
-    initials: "NL",
-    storeName: "SuperStore #45",
-    region: "North America",
-    status: "Pending",
-    dues: 0.0,
-    colorFrom: "from-indigo-100",
-    colorTo: "to-indigo-200",
-    textColor: "text-indigo-600",
-  },
-];
+import { Link } from "react-router-dom";
 
 // page
 export default function DistributorDashboard() {
   const [searchQuery, setSearchQuery] = useState("");
+  const { data } = useQuery<Distributor[]>({
+    queryKey: ["distributors", "list"], // If userId changes, it re-fetches automatically
+    queryFn: () =>
+      fetch("http://localhost:3000/distributors").then((res) => res.json()),
+  });
 
   return (
     <div className="flex h-screen w-full overflow-hidden bg-slate-100">
@@ -92,10 +48,13 @@ export default function DistributorDashboard() {
                 الإحصائيات العامة المتعلقى بالموزعين المسجلين في المنصة
               </p>
             </div>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg text-sm font-bold transition-colors shadow-md shadow-blue-200 flex items-center justify-center gap-2 w-full sm:w-auto">
+            <Link
+              to="/new-distributor"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg text-sm font-bold transition-colors shadow-md shadow-blue-200 flex items-center justify-center gap-2 w-full sm:w-auto"
+            >
               <Plus className="w-4 h-4 sm:w-5 sm:h-5" />
               أضف موزع
-            </button>
+            </Link>
           </div>
         </div>
 
@@ -104,21 +63,21 @@ export default function DistributorDashboard() {
           <StatCard
             icon={Truck}
             label="العدد الكلي"
-            value="128"
+            value={data?.length}
             badge="+4 New"
             badgeColor="text-emerald-600 bg-emerald-50"
           />
           <StatCard
             icon={ListOrdered}
             label="الطلبات المسجلة"
-            value="1,840"
+            value={0}
             badge="+12%"
             badgeColor="text-emerald-600 bg-emerald-50"
           />
           <StatCard
             icon={DollarSign}
             label="المستحقات"
-            value="$24,500"
+            value={`$${0}`}
             badge="تام التحصل"
             badgeColor="text-emerald-600 bg-emerald-50"
           />
@@ -148,62 +107,45 @@ export default function DistributorDashboard() {
                 <tr className="bg-slate-50/50 border-b border-slate-200 text-xs uppercase text-slate-600 font-bold tracking-wider">
                   <th className="px-4 sm:px-6 py-3 sm:py-4">اسم الموزع</th>
                   <th className="px-4 sm:px-6 py-3 sm:py-4">اسم المتجر</th>
-                  <th className="px-4 sm:px-6 py-3 sm:py-4">المنطقة</th>
                   <th className="px-4 sm:px-6 py-3 sm:py-4">الحالة</th>
-                  <th className="px-4 sm:px-6 py-3 sm:py-4 text-right">
-                    المستحقات
-                  </th>
+                  <th className="px-4 sm:px-6 py-3 sm:py-4">المستحقات</th>
                   <th className="px-4 sm:px-6 py-3 sm:py-4 text-center">--</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200">
-                {distributors.map((dist) => (
-                  <tr
-                    key={dist.id}
-                    className="group hover:bg-blue-50/30 transition-colors"
-                  >
-                    <td className="px-4 sm:px-6 py-3 sm:py-4">
-                      <div className="flex items-center gap-2 sm:gap-3">
-                        <div
-                          className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-linear-to-br ${dist.colorFrom} ${dist.colorTo} flex items-center justify-center ${dist.textColor} font-bold text-xs shrink-0`}
-                        >
-                          {dist.initials}
-                        </div>
-                        <div className="min-w-0">
-                          <p className="font-bold text-slate-900 text-sm sm:text-base truncate">
-                            {dist.name}
-                          </p>
-                          <p className="text-xs text-slate-600">
-                            ID: {dist.id}
-                          </p>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-4 sm:px-6 py-3 sm:py-4 text-slate-600 font-medium text-sm">
-                      {dist.storeName}
-                    </td>
-                    <td className="px-4 sm:px-6 py-3 sm:py-4 text-slate-600 text-sm">
-                      {dist.region}
-                    </td>
-                    <td className="px-4 sm:px-6 py-3 sm:py-4">
-                      <StatusBadge status={dist.status} />
-                    </td>
-                    <td
-                      className={`px-4 sm:px-6 py-3 sm:py-4 text-right font-bold text-sm ${
-                        dist.status === "Overdue"
-                          ? "text-rose-600"
-                          : "text-slate-900"
-                      }`}
+                {data &&
+                  data.map((dist) => (
+                    <tr
+                      key={dist.id}
+                      className="group hover:bg-blue-50/30 transition-colors"
                     >
-                      ${dist.dues.toFixed(2)}
-                    </td>
-                    <td className="px-4 sm:px-6 py-3 sm:py-4 text-center">
-                      <button className="text-slate-600 hover:text-blue-600 transition-colors">
-                        <MoreVertical className="w-4 h-4 sm:w-5 sm:h-5" />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                      <td className="px-4 sm:px-6 py-3 sm:py-4">
+                        <p className="font-bold text-slate-900 text-sm sm:text-base truncate">
+                          {dist.name}
+                        </p>
+                      </td>
+                      <td className="px-4 sm:px-6 py-3 sm:py-4 text-slate-600 font-medium text-sm">
+                        {dist.storeName}
+                      </td>
+                      <td className="px-4 sm:px-6 py-3 sm:py-4">
+                        <StatusBadge status={dist.status} />
+                      </td>
+                      <td
+                        className={`px-4 sm:px-6 py-3 sm:py-4 font-bold text-sm ${
+                          dist.status === "suspended"
+                            ? "text-rose-600"
+                            : "text-slate-900"
+                        }`}
+                      >
+                        ${dist.dues}
+                      </td>
+                      <td className="px-4 sm:px-6 py-3 sm:py-4 text-center">
+                        <button className="text-slate-600 hover:text-blue-600 transition-colors">
+                          <MoreVertical className="w-4 h-4 sm:w-5 sm:h-5" />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>

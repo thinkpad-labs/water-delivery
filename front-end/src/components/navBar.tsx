@@ -2,10 +2,10 @@ import {
   LayoutDashboard,
   Truck,
   BarChart3,
-  FolderOpen,
   MessageSquare,
   FileText,
   LogOut,
+  User,
 } from "lucide-react";
 import { NavItem } from "./navItem";
 
@@ -16,39 +16,39 @@ export default function NavBar() {
         <div className="flex flex-col gap-6">
           <div className="hidden md:block px-4">
             <p className="text-slate-600 text-xs font-bold uppercase tracking-widest">
-              Navigation
+              صفحات الإدارة
             </p>
           </div>
           <nav className="flex flex-col gap-2">
-            <NavItem icon={LayoutDashboard} label="Overview" to="#" />
+            <NavItem icon={LayoutDashboard} label="نظرة عامة" to="#" />
             <NavItem
               icon={Truck}
-              label="Distributors"
+              label="الموزعين"
               to="/distributors"
               active={location.pathname === "/distributors"}
             />
             <NavItem
               icon={BarChart3}
-              label="Analytics"
+              label="الحليلات"
               to="#"
               active={location.pathname === "/"}
             />
             <NavItem
-              icon={FolderOpen}
-              label="Projects"
+              icon={User}
+              label="المستخدمين"
               to="#"
               active={location.pathname === "/"}
             />
             <NavItem
               icon={MessageSquare}
-              label="Messages"
+              label="الرسائل"
               to="#"
               badge={3}
               active={location.pathname === "/"}
             />
             <NavItem
               icon={FileText}
-              label="Reports"
+              label="التقارير"
               to="#"
               active={location.pathname === "/"}
             />
@@ -63,7 +63,7 @@ export default function NavBar() {
           </div>
           <button className="hidden md:flex w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full h-12 px-4 bg-slate-100 hover:bg-red-50 hover:text-red-600 transition-colors text-slate-900 text-sm font-bold">
             <LogOut className="w-5 h-5" />
-            <span>Logout</span>
+            <span>تسجيل خروج</span>
           </button>
         </div>
       </aside>

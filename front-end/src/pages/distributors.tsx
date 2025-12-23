@@ -2,12 +2,12 @@ import { useState } from "react";
 import {
   Plus,
   Truck,
-  Store,
   DollarSign,
   Search,
   MoreVertical,
   ChevronLeft,
   ChevronRight,
+  ListOrdered,
 } from "lucide-react";
 import { StatCard } from "../components/statCard";
 import { StatusBadge } from "../components/statusBadge";
@@ -80,22 +80,21 @@ export default function DistributorDashboard() {
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 sm:h-3 sm:w-3 bg-blue-600"></span>
             </span>
             <span className="text-blue-600 text-xs sm:text-sm font-bold uppercase tracking-wider">
-              Live Updates
+              التحديثات الحية
             </span>
           </div>
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4">
             <div>
               <h1 className="text-slate-900 text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
-                Distributors Overview
+                ملخص الموزعين
               </h1>
               <p className="text-slate-600 text-sm sm:text-base max-w-2xl mt-1 sm:mt-2">
-                Manage your distribution network, view dues, and track store
-                performance.
+                الإحصائيات العامة المتعلقى بالموزعين المسجلين في المنصة
               </p>
             </div>
             <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg text-sm font-bold transition-colors shadow-md shadow-blue-200 flex items-center justify-center gap-2 w-full sm:w-auto">
               <Plus className="w-4 h-4 sm:w-5 sm:h-5" />
-              Add Distributor
+              أضف موزع
             </button>
           </div>
         </div>
@@ -104,24 +103,24 @@ export default function DistributorDashboard() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
           <StatCard
             icon={Truck}
-            label="Total Distributors"
+            label="العدد الكلي"
             value="128"
             badge="+4 New"
             badgeColor="text-emerald-600 bg-emerald-50"
           />
           <StatCard
-            icon={Store}
-            label="Active Stores"
+            icon={ListOrdered}
+            label="الطلبات المسجلة"
             value="1,840"
             badge="+12%"
             badgeColor="text-emerald-600 bg-emerald-50"
           />
           <StatCard
             icon={DollarSign}
-            label="Outstanding Dues"
+            label="المستحقات"
             value="$24,500"
-            badge="2 Overdue"
-            badgeColor="text-rose-600 bg-rose-50"
+            badge="تام التحصل"
+            badgeColor="text-emerald-600 bg-emerald-50"
           />
         </div>
 
@@ -129,7 +128,7 @@ export default function DistributorDashboard() {
         <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
           <div className="p-4 sm:p-6 border-b border-slate-200 flex flex-col gap-3 sm:gap-0 sm:flex-row sm:justify-between sm:items-center">
             <h3 className="text-slate-900 text-base sm:text-lg font-bold">
-              Distributors List
+              قائمة الموزعين
             </h3>
             <div className="relative w-full sm:w-auto">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4 sm:w-5 sm:h-5" />
@@ -147,16 +146,14 @@ export default function DistributorDashboard() {
             <table className="w-full text-left border-collapse min-w-160">
               <thead>
                 <tr className="bg-slate-50/50 border-b border-slate-200 text-xs uppercase text-slate-600 font-bold tracking-wider">
-                  <th className="px-4 sm:px-6 py-3 sm:py-4">
-                    Distributor Name
+                  <th className="px-4 sm:px-6 py-3 sm:py-4">اسم الموزع</th>
+                  <th className="px-4 sm:px-6 py-3 sm:py-4">اسم المتجر</th>
+                  <th className="px-4 sm:px-6 py-3 sm:py-4">المنطقة</th>
+                  <th className="px-4 sm:px-6 py-3 sm:py-4">الحالة</th>
+                  <th className="px-4 sm:px-6 py-3 sm:py-4 text-right">
+                    المستحقات
                   </th>
-                  <th className="px-4 sm:px-6 py-3 sm:py-4">Store Name</th>
-                  <th className="px-4 sm:px-6 py-3 sm:py-4">Region</th>
-                  <th className="px-4 sm:px-6 py-3 sm:py-4">Status</th>
-                  <th className="px-4 sm:px-6 py-3 sm:py-4 text-right">Dues</th>
-                  <th className="px-4 sm:px-6 py-3 sm:py-4 text-center">
-                    Action
-                  </th>
+                  <th className="px-4 sm:px-6 py-3 sm:py-4 text-center">--</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200">
@@ -213,7 +210,7 @@ export default function DistributorDashboard() {
 
           <div className="px-4 sm:px-6 py-3 sm:py-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-0">
             <span className="text-xs text-slate-600 text-center sm:text-left">
-              Showing 4 of 128 distributors
+              4 من أصل 128 موزع
             </span>
             <div className="flex gap-2">
               <button

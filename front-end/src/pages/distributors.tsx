@@ -21,7 +21,9 @@ export default function DistributorDashboard() {
   const { data } = useQuery<Distributor[]>({
     queryKey: ["distributors", "list"], // If userId changes, it re-fetches automatically
     queryFn: () =>
-      fetch("http://localhost:3000/distributors").then((res) => res.json()),
+      fetch("https://water-delivery.thinkpad.cloud/api/distributors").then(
+        (res) => res.json()
+      ),
   });
 
   return (

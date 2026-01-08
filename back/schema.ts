@@ -178,3 +178,25 @@ export const ordersRelations = relations(orders, ({ one }) => ({
     references: [bills.id],
   }),
 }));
+
+export const schema = {
+  consumerStatusEnum,
+  distributorStatusEnum,
+  orderStatusEnum,
+  paymentMethodEnum,
+  logs,
+  users,
+  consumers,
+  distributors,
+  brands,
+  distributorBrand,
+  bills,
+  orders,
+  usersRelations,
+  consumersRelations,
+  distributorsRelations,
+  brandsRelations,
+  distributorBrandRelations,
+  billsRelations,
+  ordersRelations,
+};

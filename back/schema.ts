@@ -45,8 +45,8 @@ export const logs = pgTable('logs', {
 // 2. users table
 export const users = pgTable('users', {
   id: uuid('id').primaryKey(),
-  name: text('name'),
-  phone: varchar('phone'),
+  name: text('name').notNull(),
+  phone: varchar('phone').notNull(),
   email: text('email'),
   password: varchar('password').notNull(),
   location: point('location'), // Mapped 'GIS' to Postgres 'point' (x,y)
@@ -69,7 +69,7 @@ export const distributors = pgTable('distributors', {
 // 5. brands table
 export const brands = pgTable('brands', {
   id: uuid('id').primaryKey(),
-  name: text('name'),
+  name: text('name').notNull(),
 });
 
 // 6. distributor_brand table
@@ -86,9 +86,9 @@ export const bills = pgTable('bills', {
   id: uuid('id').primaryKey(),
   distributor_id: uuid('distributor_id').references(() => distributors.id),
   brand_id: uuid('brand_id').references(() => brands.id),
-  count: integer('count'),
-  price: real('price'),
-  payment_method: paymentMethodEnum('payment_method'),
+  count: integer('count').notNull(),
+  price: real('price').notNull(),
+  payment_method: paymentMethodEnum('payment_method').notNull(),
 });
 
 // 8. orders table

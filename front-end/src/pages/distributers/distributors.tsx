@@ -10,9 +10,9 @@ import {
   ChevronRight,
   ListOrdered,
 } from "lucide-react";
-import { StatCard } from "../components/statCard";
-import { StatusBadge } from "../components/statusBadge";
-import type { Distributor } from "../types/distributors";
+import { StatCard } from "../../components/statCard";
+import { StatusBadge } from "../../components/statusBadge";
+import type { Distributor } from "../../types/distributors";
 import { Link } from "react-router-dom";
 
 // page

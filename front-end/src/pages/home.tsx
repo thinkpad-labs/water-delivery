@@ -7,7 +7,7 @@ export default function Home() {
       dir="rtl"
     >
       <Link
-        to="/signup"
+        to="/user-type"
         className="text-2xl rounded-lg bg-slate-50 py-2 px-10 text-slate-700"
       >
         انضم إلى خدمتنا

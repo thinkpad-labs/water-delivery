@@ -5,4 +5,4 @@ import { DATABASE_PROVIDER, DatabaseAsyncProvider } from './database.service';
   providers: [...DATABASE_PROVIDER],
   exports: [DatabaseAsyncProvider],
 })
-export class DatabaseModule {}
+export class DatabaseModule { }

@@ -6,8 +6,12 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './google/auth.module';
 
 @Module({
-  imports: [DatabaseModule, ConfigModule.forRoot({ isGlobal: true }), AuthModule],
+  imports: [
+    DatabaseModule,
+    ConfigModule.forRoot({ isGlobal: true }),
+    AuthModule, 
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

@@ -52,9 +52,13 @@ const drizzle_orm_1 = require("drizzle-orm");
 const database_service_1 = require("../database/database.service");
 const schema = __importStar(require("../../schema"));
 const node_postgres_1 = require("drizzle-orm/node-postgres");
+const bcrypt = __importStar(require("bcrypt"));
 let AuthService = class AuthService {
     db;
     jwtService;
+    getAllUsers() {
+        return this.db.query.users.findMany();
+    }
     constructor(db, jwtService) {
         this.db = db;
         this.jwtService = jwtService;
@@ -107,6 +111,51 @@ let AuthService = class AuthService {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 picture: user.picture,
+            },
+            accessToken,
+        };
+    }
+    async createUser(data) {
+        const { email, password, firstName, lastName, picture, phone, location, googleId, } = data;
+        const existing = await this.db
+            .select()
+            .from(schema.users)
+            .where((0, drizzle_orm_1.eq)(schema.users.email, email))
+            .limit(1);
+        if (existing[0])
+            return { message: 'User already exists' };
+        const hash = await bcrypt.hash(password, 10);
+        const insertValues = {
+            firstName,
+            lastName,
+            password: hash,
+            email,
+            picture,
+            phone,
+            provider: 'local',
+            googleId,
+        };
+        if (location)
+            insertValues.location = { x: location.x, y: location.y };
+        console.log(insertValues);
+        const newUsers = await this.db
+            .insert(schema.users)
+            .values(insertValues)
+            .returning();
+        const user = newUsers[0];
+        const payload = { email: user.email, sub: user.id };
+        const accessToken = this.jwtService.sign(payload);
+        return {
+            message: 'User created',
+            user: {
+                id: user.id,
+                email: user.email,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                picture: user.picture,
+                phone: user.phone,
+                provider: user.provider,
+                location: user.location,
             },
             accessToken,
         };

@@ -71,7 +71,7 @@ export declare const users: import("drizzle-orm/pg-core").PgTableWithColumns<{
             columnType: "PgVarchar";
             data: string;
             driverParam: string;
-            notNull: true;
+            notNull: false;
             hasDefault: false;
             isPrimaryKey: false;
             isAutoincrement: false;
@@ -84,13 +84,13 @@ export declare const users: import("drizzle-orm/pg-core").PgTableWithColumns<{
             length: 255;
         }>;
         firstName: import("drizzle-orm/pg-core").PgColumn<{
-            name: "name";
+            name: "first_name";
             tableName: "users";
             dataType: "string";
             columnType: "PgText";
             data: string;
             driverParam: string;
-            notNull: true;
+            notNull: false;
             hasDefault: false;
             isPrimaryKey: false;
             isAutoincrement: false;
@@ -101,13 +101,13 @@ export declare const users: import("drizzle-orm/pg-core").PgTableWithColumns<{
             generated: undefined;
         }, {}, {}>;
         lastName: import("drizzle-orm/pg-core").PgColumn<{
-            name: "name";
+            name: "last_name";
             tableName: "users";
             dataType: "string";
             columnType: "PgText";
             data: string;
             driverParam: string;
-            notNull: true;
+            notNull: false;
             hasDefault: false;
             isPrimaryKey: false;
             isAutoincrement: false;
@@ -211,10 +211,13 @@ export declare const users: import("drizzle-orm/pg-core").PgTableWithColumns<{
         location: import("drizzle-orm/pg-core").PgColumn<{
             name: "location";
             tableName: "users";
-            dataType: "array";
-            columnType: "PgPointTuple";
-            data: [number, number];
-            driverParam: string | number;
+            dataType: "json";
+            columnType: "PgPointObject";
+            data: {
+                x: number;
+                y: number;
+            };
+            driverParam: string;
             notNull: false;
             hasDefault: false;
             isPrimaryKey: false;
@@ -765,7 +768,7 @@ export declare const schema: {
                 columnType: "PgVarchar";
                 data: string;
                 driverParam: string;
-                notNull: true;
+                notNull: false;
                 hasDefault: false;
                 isPrimaryKey: false;
                 isAutoincrement: false;
@@ -778,13 +781,13 @@ export declare const schema: {
                 length: 255;
             }>;
             firstName: import("drizzle-orm/pg-core").PgColumn<{
-                name: "name";
+                name: "first_name";
                 tableName: "users";
                 dataType: "string";
                 columnType: "PgText";
                 data: string;
                 driverParam: string;
-                notNull: true;
+                notNull: false;
                 hasDefault: false;
                 isPrimaryKey: false;
                 isAutoincrement: false;
@@ -795,13 +798,13 @@ export declare const schema: {
                 generated: undefined;
             }, {}, {}>;
             lastName: import("drizzle-orm/pg-core").PgColumn<{
-                name: "name";
+                name: "last_name";
                 tableName: "users";
                 dataType: "string";
                 columnType: "PgText";
                 data: string;
                 driverParam: string;
-                notNull: true;
+                notNull: false;
                 hasDefault: false;
                 isPrimaryKey: false;
                 isAutoincrement: false;
@@ -905,10 +908,13 @@ export declare const schema: {
             location: import("drizzle-orm/pg-core").PgColumn<{
                 name: "location";
                 tableName: "users";
-                dataType: "array";
-                columnType: "PgPointTuple";
-                data: [number, number];
-                driverParam: string | number;
+                dataType: "json";
+                columnType: "PgPointObject";
+                data: {
+                    x: number;
+                    y: number;
+                };
+                driverParam: string;
                 notNull: false;
                 hasDefault: false;
                 isPrimaryKey: false;

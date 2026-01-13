@@ -46,15 +46,15 @@ export const logs = pgTable('logs', {
 // 2. users table
 export const users = pgTable('users', {
   id: uuid('id').primaryKey().defaultRandom(),
-  googleId: varchar('google_id', { length: 255 }).notNull().unique(),
-  firstName: text('name').notNull(),
-  lastName: text('name').notNull(),
+  googleId: varchar('google_id', { length: 255 }).unique(),
+  firstName: text('first_name'),
+  lastName: text('last_name'),
   phone: varchar('phone'),
   provider: text('provider'),
   picture: varchar('picture', { length: 500 }),
   email: text('email'),
   password: varchar('password'),
-  location: point('location'), // Mapped 'GIS' to Postgres 'point' (x,y)
+  location: point('location', { mode: 'xy' }), // Mapped 'GIS' to Postgres 'point' (x,y)
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });

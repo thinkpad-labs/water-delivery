@@ -29,15 +29,15 @@ exports.logs = (0, pg_core_1.pgTable)('logs', {
 });
 exports.users = (0, pg_core_1.pgTable)('users', {
     id: (0, pg_core_1.uuid)('id').primaryKey().defaultRandom(),
-    googleId: (0, pg_core_1.varchar)('google_id', { length: 255 }).notNull().unique(),
-    firstName: (0, pg_core_1.text)('name').notNull(),
-    lastName: (0, pg_core_1.text)('name').notNull(),
+    googleId: (0, pg_core_1.varchar)('google_id', { length: 255 }).unique(),
+    firstName: (0, pg_core_1.text)('first_name'),
+    lastName: (0, pg_core_1.text)('last_name'),
     phone: (0, pg_core_1.varchar)('phone'),
     provider: (0, pg_core_1.text)('provider'),
     picture: (0, pg_core_1.varchar)('picture', { length: 500 }),
     email: (0, pg_core_1.text)('email'),
     password: (0, pg_core_1.varchar)('password'),
-    location: (0, pg_core_1.point)('location'),
+    location: (0, pg_core_1.point)('location', { mode: 'xy' }),
     createdAt: (0, pg_core_1.timestamp)('created_at').defaultNow().notNull(),
     updatedAt: (0, pg_core_1.timestamp)('updated_at').defaultNow().notNull(),
 });

@@ -4,106 +4,185 @@ import { eq } from 'drizzle-orm';
 import { DatabaseAsyncProvider } from 'src/database/database.service';
 import * as schema from '../../schema';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
-    constructor(
-        @Inject(DatabaseAsyncProvider) private db: NodePgDatabase<typeof schema>,
-        private jwtService: JwtService,
-    ) { }
+  getAllUsers() {
+    return this.db.query.users.findMany();
+  }
+  constructor(
+    @Inject(DatabaseAsyncProvider) private db: NodePgDatabase<typeof schema>,
+    private jwtService: JwtService,
+  ) {}
 
-    async googleLogin(req: any) {
-        if (!req.user) {
-            return { message: 'No user from google' };
-        }
-
-        const { googleId, email, firstName, lastName, picture } = req.user;
-
-        // Check if user exists
-        const existingUsers = await this.db
-            .select()
-            .from(schema.users)
-            .where(eq(schema.users.googleId, googleId))
-            .limit(1);
-
-        let user = existingUsers[0];
-
-        // If user doesn't exist, create new user
-        if (!user) {
-            const newUsers = await this.db
-                .insert(schema.users)
-                .values({
-                    googleId,
-                    email,
-                    firstName,
-                    lastName,
-                    picture,
-                    provider: 'google',
-                })
-                .returning();
-            user = newUsers[0];
-        } else {
-            // Update user info if needed
-            const updatedUsers = await this.db
-                .update(schema.users)
-                .set({
-                    firstName,
-                    lastName,
-                    picture,
-                    updatedAt: new Date(),
-                })
-                .where(eq(schema.users.id, user.id))
-                .returning();
-            user = updatedUsers[0];
-        }
-
-        // Generate JWT token
-        const payload = { email: user.email, sub: user.id };
-        const accessToken = this.jwtService.sign(payload);
-
-        return {
-            message: 'User information from google',
-            user: {
-                id: user.id,
-                email: user.email,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                picture: user.picture,
-            },
-            accessToken,
-        };
+  async googleLogin(req: any) {
+    if (!req.user) {
+      return { message: 'No user from google' };
     }
 
-    async validateUserById(userId: string) {
-        const users = await this.db
-            .select()
-            .from(schema.users)
-            .where(eq(schema.users.id, userId))
-            .limit(1);
+    const { googleId, email, firstName, lastName, picture } = req.user;
 
-        return users[0] || null;
+    // Check if user exists
+    const existingUsers = await this.db
+      .select()
+      .from(schema.users)
+      .where(eq(schema.users.googleId, googleId))
+      .limit(1);
+
+    let user = existingUsers[0];
+
+    // If user doesn't exist, create new user
+    if (!user) {
+      const newUsers = await this.db
+        .insert(schema.users)
+        .values({
+          googleId,
+          email,
+          firstName,
+          lastName,
+          picture,
+          provider: 'google',
+        })
+        .returning();
+      user = newUsers[0];
+    } else {
+      // Update user info if needed
+      const updatedUsers = await this.db
+        .update(schema.users)
+        .set({
+          firstName,
+          lastName,
+          picture,
+          updatedAt: new Date(),
+        })
+        .where(eq(schema.users.id, user.id))
+        .returning();
+      user = updatedUsers[0];
     }
 
-    async getProfile(userId: string) {
-        const users = await this.db
-            .select()
-            .from(schema.users)
-            .where(eq(schema.users.id, userId))
-            .limit(1);
+    // Generate JWT token
+    const payload = { email: user.email, sub: user.id };
+    const accessToken = this.jwtService.sign(payload);
 
-        const user = users[0];
+    return {
+      message: 'User information from google',
+      user: {
+        id: user.id,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        picture: user.picture,
+      },
+      accessToken,
+    };
+  }
 
-        if (!user) {
-            return null;
-        }
+  async createUser(data: {
+    email: string;
+    password: string;
+    firstName?: string;
+    lastName?: string;
+    picture?: string;
+    phone?: string;
+    location?: { x: number; y: number };
+    googleId?: string;
+  }) {
+    const {
+      email,
+      password,
+      firstName,
+      lastName,
+      picture,
+      phone,
+      location,
+      googleId,
+    } = data;
 
-        return {
-            id: user.id,
-            email: user.email,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            picture: user.picture,
-            createdAt: user.createdAt,
-        };
+    const existing = await this.db
+      .select()
+      .from(schema.users)
+      .where(eq(schema.users.email, email))
+      .limit(1);
+
+    if (existing[0]) return { message: 'User already exists' };
+
+    const hash = await bcrypt.hash(password, 10);
+
+    // Build insert object, only include location when provided.
+    const insertValues: any = {
+      firstName,
+      lastName,
+      password: hash,
+      email,
+      picture,
+      phone,
+      provider: 'local',
+      googleId,
+    };
+
+    if (location) 
+      // Insert Postgres point as literal '(x,y)'. Adjust if your DB adapter expects a different shape.
+      insertValues.location = { x: location.x, y: location.y };
+    
+    console.log(insertValues);
+
+    const newUsers = await this.db
+      .insert(schema.users)
+      .values(insertValues)
+      .returning();
+
+    const user = newUsers[0];
+
+    const payload = { email: user.email, sub: user.id };
+    const accessToken = this.jwtService.sign(payload);
+
+    return {
+      message: 'User created',
+      user: {
+        id: user.id,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        picture: user.picture,
+        phone: user.phone,
+        provider: user.provider,
+        location: user.location,
+      },
+      accessToken,
+    };
+  }
+
+  async validateUserById(userId: string) {
+    const users = await this.db
+      .select()
+      .from(schema.users)
+      .where(eq(schema.users.id, userId))
+      .limit(1);
+
+    return users[0] || null;
+  }
+
+  async getProfile(userId: string) {
+    const users = await this.db
+      .select()
+      .from(schema.users)
+      .where(eq(schema.users.id, userId))
+      .limit(1);
+
+    const user = users[0];
+
+    if (!user) {
+      return null;
     }
-}   
+
+    return {
+      id: user.id,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      picture: user.picture,
+      createdAt: user.createdAt,
+    };
+  }
+}

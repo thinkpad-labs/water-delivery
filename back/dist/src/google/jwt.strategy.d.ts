@@ -10,15 +10,18 @@ export declare class JwtStrategy extends JwtStrategy_base {
     constructor(configService: ConfigService, authService: AuthService);
     validate(payload: any): Promise<{
         id: string;
-        googleId: string;
-        firstName: string;
-        lastName: string;
+        googleId: string | null;
+        firstName: string | null;
+        lastName: string | null;
         phone: string | null;
         provider: string | null;
         picture: string | null;
         email: string | null;
         password: string | null;
-        location: [number, number] | null;
+        location: {
+            x: number;
+            y: number;
+        } | null;
         createdAt: Date;
         updatedAt: Date;
     }>;

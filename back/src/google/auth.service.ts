@@ -121,12 +121,9 @@ export class AuthService {
       googleId,
     };
 
-    if (location) 
+    if (location)
       // Insert Postgres point as literal '(x,y)'. Adjust if your DB adapter expects a different shape.
       insertValues.location = { x: location.x, y: location.y };
-    
-    console.log(insertValues);
-
     const newUsers = await this.db
       .insert(schema.users)
       .values(insertValues)
@@ -184,5 +181,10 @@ export class AuthService {
       picture: user.picture,
       createdAt: user.createdAt,
     };
+  }
+
+  logout(req: Request) {
+    console.log(req);
+    /// delete the refresh token if any and the browser shoud clean the token from the headers
   }
 }

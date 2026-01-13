@@ -29,6 +29,7 @@ let JwtStrategy = class JwtStrategy extends (0, passport_1.PassportStrategy)(pas
     }
     async validate(payload) {
         const user = await this.authService.validateUserById(payload.sub);
+        console.log('JWT validation payload:', payload);
         if (!user) {
             throw new common_1.UnauthorizedException();
         }

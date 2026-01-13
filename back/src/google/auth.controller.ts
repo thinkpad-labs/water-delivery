@@ -58,9 +58,14 @@ export class AuthController {
 
   @Post('login')
   login(@Body() payload) {
-    
     return this.authService.createUser(payload);
   }
+
+  @Post('logout')
+  logout(@Req() req: Request) {
+    return this.authService.logout(req);
+  }
+
   @Get('users') /// to remove later
   getAll() {
     return this.authService.getAllUsers();

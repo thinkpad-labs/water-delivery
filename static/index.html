@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>بيوركس | شريكك الرقمي لتوزيع المياه</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="icon" type="image/pg" href="favicon.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Cairo", sans-serif;
+        scroll-behavior: smooth;
+      }
+      .gradient-bg {
+        background: linear-gradient(135deg, #075985 0%, #0369a1 100%);
+      }
+      .hero-pattern {
+        background-color: #f0f9ff;
+        background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+      }
+      .floating {
+        animation: floating 3s ease-in-out infinite;
+      }
+      @keyframes floating {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+    </style>
+  </head>
+  <body class="bg-slate-50 text-slate-900">
+    <!-- Navigation -->
+    <nav
+      class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-blue-100"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-20 items-center">
+          <div>
+            <img src="purex.svg" alt="logo" class="h-40" />
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="hidden md:flex space-x-reverse space-x-8">
+              <a
+                href="#about"
+                class="text-slate-600 hover:text-blue-600 transition-colors"
+                >عن المنصة</a
+              >
+              <a
+                href="#features"
+                class="text-slate-600 hover:text-blue-600 transition-colors"
+                >المميزات</a
+              >
+              <a
+                href="#services"
+                class="text-slate-600 hover:text-blue-600 transition-colors"
+                >خدماتنا</a
+              >
+            </div>
+          </div>
+          <div>
+            <a
+              href="#register"
+              class="bg-blue-600 text-white px-6 py-2.5 rounded-full font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-200"
+            >
+              سجل الآن
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4 hero-pattern overflow-hidden">
+      <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+        <div class="hero-content opacity-0">
+          <h1
+            class="text-4xl md:text-6xl font-extrabold text-blue-950 leading-tight mb-6"
+          >
+            شريكك الرقمي الأول للنمو في سوق المدينة المنورة
+          </h1>
+          <p class="text-lg text-slate-600 mb-8 leading-relaxed">
+            انضم إلى أكبر تجمع لشركات توزيع المياه، وضاعف مبيعاتك وأدر أسطولك
+            بذكاء. بيوركس هي ذراعك التقني الذي يخلصك من عناء البحث عن العملاء.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <button
+              class="bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-blue-700 shadow-xl shadow-blue-200 flex items-center justify-center gap-2"
+            >
+              <span>ابدأ نمو أعمالك اليوم</span>
+              <i data-lucide="chevron-left" class="w-5 h-5"></i>
+            </button>
+          </div>
+        </div>
+        <div class="relative hero-image opacity-0">
+          <div
+            class="w-full h-[20rem] bg-blue-100 rounded-3xl relative overflow-hidden flex items-center justify-center"
+          >
+            <i
+              data-lucide="smartphone"
+              class="w-64 h-64 text-blue-200 absolute -bottom-10 -right-10"
+            ></i>
+            <div
+              class="bg-white p-6 rounded-2xl shadow-2xl floating z-10 w-64 border border-blue-50"
+            >
+              <div class="flex items-center gap-3 mb-4">
+                <div
+                  class="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center"
+                >
+                  <i data-lucide="check-circle" class="w-6 h-6"></i>
+                </div>
+                <div>
+                  <div class="text-xs text-slate-400">طلب جديد</div>
+                  <div class="font-bold">توصيل حي الروضة</div>
+                </div>
+              </div>
+              <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+                <div class="w-2/3 h-full bg-blue-500"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Purex Section -->
+    <section id="about" class="py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-3xl font-bold text-blue-950 mb-4">
+            لماذا بيوركس هي الحل الأمثل لعملك؟
+          </h2>
+          <p class="text-slate-500">
+            في سوق تنافسي، تحتاج شركتك إلى التواجد حيث يتواجد العميل. نحن ندير
+            عملياتك المالية والتشغيلية بدقة متناهية.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-4 gap-8">
+          <!-- Feature 1 -->
+          <div
+            class="p-8 rounded-3xl border border-blue-50 bg-blue-50/30 hover:shadow-xl transition-shadow feature-card opacity-0"
+          >
+            <div
+              class="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white mb-6"
+            >
+              <i data-lucide="zap" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">سوق مفتوح 24/7</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              نضع طلبات المدينة المنورة بين يديك فور قيام العميل بالطلب.
+            </p>
+          </div>
+          <!-- Feature 2 -->
+          <div
+            class="p-8 rounded-3xl border border-blue-50 bg-blue-50/30 hover:shadow-xl transition-shadow feature-card opacity-0"
+          >
+            <div
+              class="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white mb-6"
+            >
+              <i data-lucide="layout-dashboard" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">لوحة تحكم ذكية</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              متابعة المبيعات والتقارير وحالة التوصيل لحظة بلحظة.
+            </p>
+          </div>
+          <!-- Feature 3 -->
+          <div
+            class="p-8 rounded-3xl border border-blue-50 bg-blue-50/30 hover:shadow-xl transition-shadow feature-card opacity-0"
+          >
+            <div
+              class="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white mb-6"
+            >
+              <i data-lucide="credit-card" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">تحول مالي رقمي</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              وداعاً لمشاكل التحصيل النقدي وضياع الفواتير الورقية.
+            </p>
+          </div>
+          <!-- Feature 4 -->
+          <div
+            class="p-8 rounded-3xl border border-blue-50 bg-blue-50/30 hover:shadow-xl transition-shadow feature-card opacity-0"
+          >
+            <div
+              class="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white mb-6"
+            >
+              <i data-lucide="truck" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">كفاءة التشغيل</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              اختيار الطلبات القريبة من مساراتك لتقليل استهلاك الوقود.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section
+      id="services"
+      class="py-24 bg-blue-950 text-white overflow-hidden relative"
+    >
+      <div
+        class="absolute top-0 right-0 w-96 h-96 bg-blue-600/40 rounded-full blur-3xl"
+      ></div>
+      <div class="max-w-7xl mx-auto px-4 relative z-10">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+          <div>
+            <h2 class="text-4xl font-bold mb-8">خدمات مخصصة لنمو الشركات</h2>
+            <ul class="space-y-6">
+              <li class="flex items-start gap-4">
+                <div
+                  class="w-10 h-10 rounded-full bg-blue-600/20 flex items-center justify-center text-blue-400 shrink-0"
+                >
+                  <i data-lucide="tag" class="w-6 h-6"></i>
+                </div>
+                <div>
+                  <h4 class="text-xl font-bold mb-1">نظام عروض الأسعار</h4>
+                  <p class="text-slate-400">
+                    تقديم أسعار تنافسية بناءً على الكمية وموقع العميل.
+                  </p>
+                </div>
+              </li>
+              <li class="flex items-start gap-4">
+                <div
+                  class="w-10 h-10 rounded-full bg-blue-600/20 flex items-center justify-center text-blue-400 shrink-0"
+                >
+                  <i data-lucide="megaphone" class="w-6 h-6"></i>
+                </div>
+                <div>
+                  <h4 class="text-xl font-bold mb-1">التسويق والانتشار</h4>
+                  <p class="text-slate-400">
+                    نروج لعلامتك التجارية لرفع وعي العملاء بجودة مياهك.
+                  </p>
+                </div>
+              </li>
+              <li class="flex items-start gap-4">
+                <div
+                  class="w-10 h-10 rounded-full bg-blue-600/20 flex items-center justify-center text-blue-400 shrink-0"
+                >
+                  <i data-lucide="heart" class="w-6 h-6"></i>
+                </div>
+                <div>
+                  <h4 class="text-xl font-bold mb-1">إدارة التبرعات (سقيا)</h4>
+                  <p class="text-slate-400">
+                    ربط شركتك بطلبات التبرع الضخمة للمساجد والجهات الخيرية.
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div
+            class="gradient-bg p-12 rounded-[3rem] text-center service-promo"
+          >
+            <i
+              data-lucide="quote"
+              class="w-12 h-12 mb-6 opacity-50 inline-block"
+            ></i>
+            <h3 class="text-2xl font-bold leading-relaxed mb-8">
+              "أنت تركز على التعبئة والتوصيل.. ونحن نتولى عنك التقنية، التسويق،
+              والتحصيل."
+            </h3>
+            <div class="h-1 w-20 bg-white/30 mx-auto"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Registration CTA -->
+    <section id="register" class="py-24 bg-blue-50">
+      <div class="max-w-5xl mx-auto px-4">
+        <div
+          class="bg-white rounded-[3rem] shadow-2xl overflow-hidden grid md:grid-cols-2"
+        >
+          <div class="p-12">
+            <h2 class="text-3xl font-bold text-blue-950 mb-4">
+              انضم إلى شبكة بيوركس اليوم
+            </h2>
+            <p class="text-slate-500 mb-8">
+              ابدأ عهداً جديداً من الأرباح والتحول الرقمي لشركتك. فريقنا جاهز
+              لدعمك في كل خطوة.
+            </p>
+
+            <form
+              onsubmit="event.preventDefault(); showSuccess();"
+              class="space-y-4"
+            >
+              <input
+                type="text"
+                placeholder="اسم الشركة"
+                class="w-full px-6 py-4 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none"
+              />
+              <input
+                type="tel"
+                placeholder="رقم الجوال"
+                class="w-full px-6 py-4 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none"
+              />
+              <button
+                type="submit"
+                class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-blue-700 shadow-xl shadow-blue-200 transition-all"
+              >
+                تسجيل اهتمامي الآن
+              </button>
+            </form>
+            <div
+              id="success-msg"
+              class="hidden mt-4 p-4 bg-green-50 text-green-700 rounded-xl text-center font-bold"
+            >
+              تم استلام طلبك! سنتواصل معك قريباً.
+            </div>
+          </div>
+          <div class="gradient-bg p-12 flex flex-col justify-center text-white">
+            <h3 class="text-xl font-bold mb-6">للتواصل المباشر:</h3>
+            <div class="space-y-4">
+              <a
+                href="mailto:athinkpad0@gmail.com"
+                class="flex items-center gap-3 hover:-translate-x-1 transition-transform"
+              >
+                <i data-lucide="mail" class="w-6 h-6"></i>
+                <span>athinkpad0@gmail.com</span>
+              </a>
+              <a
+                href="tel:+966580401651"
+                class="flex items-center gap-3 hover:-translate-x-1 transition-transform"
+              >
+                <i data-lucide="phone" class="w-6 h-6"></i>
+                <span>+966 058 0401651</span>
+              </a>
+              <a
+                href="tel:+966580056525"
+                class="flex items-center gap-3 hover:-translate-x-1 transition-transform"
+              >
+                <i data-lucide="phone" class="w-6 h-6"></i>
+                <span>+966 058 005 6525</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pt-20 pb-12 bg-white border-t border-slate-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+          <!-- Brand Column -->
+          <div>
+            <img
+              src="purex.svg"
+              alt="logo"
+              class="h-60 w-60 -translate-y-20 md:block hidden"
+            />
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h4 class="text-blue-950 font-bold mb-6">روابط سريعة</h4>
+            <ul class="space-y-4 text-slate-500 text-sm">
+              <li>
+                <a href="#about" class="hover:text-blue-600 transition-colors"
+                  >عن بيوركس</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#features"
+                  class="hover:text-blue-600 transition-colors"
+                  >المميزات والفوائد</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#services"
+                  class="hover:text-blue-600 transition-colors"
+                  >خدمات الشركات</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#register"
+                  class="hover:text-blue-600 transition-colors"
+                  >انضم إلينا</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact Details -->
+          <div class="col-span-1 md:col-span-2">
+            <h4 class="text-blue-950 font-bold mb-6">معلومات التواصل</h4>
+            <div class="grid sm:grid-cols-2 gap-6">
+              <div class="space-y-4 text-slate-500 text-sm">
+                <a
+                  href="mailto:athinkpad0@gmail.com"
+                  class="flex items-center gap-3 hover:text-blue-600 group"
+                >
+                  <div
+                    class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all"
+                  >
+                    <i data-lucide="mail" class="w-4 h-4"></i>
+                  </div>
+                  <span>athinkpad0@gmail.com</span>
+                </a>
+                <div class="flex items-center gap-3 group">
+                  <div
+                    class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600"
+                  >
+                    <i data-lucide="map-pin" class="w-4 h-4"></i>
+                  </div>
+                  <span>المدينة المنورة، المملكة العربية السعودية</span>
+                </div>
+              </div>
+              <div class="space-y-4 text-slate-500 text-sm">
+                <a
+                  href="tel:+966580401651"
+                  class="flex items-center gap-3 hover:text-blue-600 group"
+                >
+                  <div
+                    class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all"
+                  >
+                    <i data-lucide="phone" class="w-4 h-4"></i>
+                  </div>
+                  <span dir="ltr">+966 058 0401651</span>
+                </a>
+                <a
+                  href="tel:+966580056525"
+                  class="flex items-center gap-3 hover:text-blue-600 group"
+                >
+                  <div
+                    class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all"
+                  >
+                    <i data-lucide="phone" class="w-4 h-4"></i>
+                  </div>
+                  <span dir="ltr">+966 058 005 6525</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Social/Chat Links -->
+            <div class="mt-8 pt-8 border-t border-slate-50 flex gap-4">
+              <a
+                href="https://wa.me/966580401651"
+                class="bg-green-500 text-white px-6 py-2 rounded-full text-sm font-bold flex items-center gap-2 hover:bg-green-600 transition-colors"
+              >
+                <i data-lucide="message-circle" class="w-4 h-4"></i>
+                <span>تواصل عبر واتساب</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Copyright -->
+        <div
+          class="pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4"
+        >
+          <p class="text-slate-400 text-xs">
+            © 2026 بيوركس | PUREX. جميع الحقوق محفوظة.
+          </p>
+          <div class="flex gap-6 text-xs text-slate-400">
+            <a href="#" class="hover:text-blue-600">سياسة الخصوصية</a>
+            <a href="#" class="hover:text-blue-600">الشروط والأحكام</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Initialize Icons
+      lucide.createIcons();
+
+      // Animations
+      window.addEventListener("DOMContentLoaded", () => {
+        // Hero Animation
+        anime({
+          targets: ".hero-content",
+          translateX: [50, 0],
+          opacity: [0, 1],
+          duration: 1200,
+          easing: "easeOutExpo",
+        });
+
+        anime({
+          targets: ".hero-image",
+          translateX: [-50, 0],
+          opacity: [0, 1],
+          duration: 1200,
+          delay: 200,
+          easing: "easeOutExpo",
+        });
+
+        // Scroll animations using Intersection Observer
+        const observerOptions = {
+          threshold: 0.1,
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              if (entry.target.classList.contains("feature-card")) {
+                anime({
+                  targets: entry.target,
+                  translateY: [30, 0],
+                  opacity: [0, 1],
+                  duration: 800,
+                  easing: "easeOutCubic",
+                });
+              }
+              observer.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+
+        document.querySelectorAll(".feature-card").forEach((card) => {
+          observer.observe(card);
+        });
+      });
+
+      function showSuccess() {
+        const msg = document.getElementById("success-msg");
+        msg.classList.remove("hidden");
+        anime({
+          targets: msg,
+          scale: [0.9, 1],
+          opacity: [0, 1],
+          duration: 400,
+        });
+      }
+    </script>
+  </body>
+</html>
